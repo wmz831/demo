@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="CONTENT-TYPE" content="TEXT/HTML; CHARSET=UTF-8"/>
+    <title>upLoading</title>
+    <meta name="keywords" content="keyword1,keyword2,keyword3"/>
+    <meta name="description" content="this is my page"/>
+    <meta name="content-type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"/>
+</head>
+<body>
+<form enctype="multipart/form-data" method="post" action="/uploadFile">
+    <p>单文件上传</p><br/>
+    <input type="file" name="file"/>
+    <input type="submit" value="上传"/>
+</form>
+
+<form enctype="multipart/form-data" method="post" id="ajaxForm">
+    <p>ajax文件上传:</p><br/>
+    <p>文件1：<input type="file" name="files"/></p>
+    <input type="button" value="上传" id="btn"/>
+</form>
+
+<div id="uploadForm">
+    <input id="file" type="file" name="file"/>
+    <button id="upload" type="button" onclick="fileUpload()">upload</button>
+</div>
+
+<a href="/fileDownload">下载</a>
+
+<script>
+    function fileUpload(){
+        var formData = new FormData();
+        formData.append('file', $('#file')[0].files[0]);
+        $.ajax({
+            url: '/ajaxUp',
+            type: 'POST',
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function(res) {
+        }).fail(function(res) {});
+    }
+
+</script>
+<!--https://blog.csdn.net/helloworldyangsong/article/details/78448931-->
+<!--https://blog.csdn.net/xiao______xin/article/details/53467380-->
+</body>
+</html>
